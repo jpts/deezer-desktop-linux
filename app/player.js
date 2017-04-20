@@ -104,25 +104,26 @@ const Player = function(mainWindow, configPath) {
                         }
                     }
 
-                    let coverPath = config.path + "/" + value.ALB_PICTURE + '.jpg';
+		    let coverPath = config.path + "/" + value.ALB_PICTURE + '.jpg';
+		    let url = 'http://cdn-images.deezer.com/images/cover/' + value.ALB_PICTURE + '/125x125.jpg';
 
-                    try {
+                    /*try {
                         fs.statSync(coverPath);
                     } catch (error) {
-                        http.get('http://cdn-images.deezer.com/images/cover/' + value.ALB_PICTURE + '/125x125.jpg', function (response) {
-                            response.on('data', function (chunk) {
-                                fs.writeFile(coverPath, chunk, function (err) {
-                                    if (err) {
-                                        throw err;
-                                    }
-                                });
-                            });
+			request.head(url, function(err,response,body){
+                            if (response.statusCode == 200) {
+                                request(url).pipe(fs.createWriteStream(tempPath)).on('close',update);
+				});
+                            } else {
+			        throw err;
+			    }
                         });
-                    }
+                    }*/
 
                     player.metadata = {
                         'mpris:trackid': value.SNG_ID,
-                        'mpris:artUrl': coverPath,
+			//'mpris:artUrl': 'file://'+coverPath,
+                        'mpris:artUrl': url,
                         'mpris:length': value.DURATION * 1000000, // In microseconds 
                         'xesam:album': value.ALB_TITLE,
                         'xesam:albumArtist': value.ART_NAME,
