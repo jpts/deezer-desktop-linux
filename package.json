@@ -1,10 +1,10 @@
 {
   "devDependencies": {
     "dbus": "^1.0.0",
+    "electron": "^1.6.5",
     "electron-builder": "^13.9.0",
     "electron-installer-debian": "^0.4.0",
     "electron-packager": "^8.5.1",
-    "electron-prebuilt": "^1.4.13",
     "mpris-service": "^1.1.1"
   },
   "scripts": {
