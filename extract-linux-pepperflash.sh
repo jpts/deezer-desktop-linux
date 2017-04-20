@@ -17,7 +17,7 @@ else
 fi
 
 # Set Output dir
-PPAPI_FLASH_INSTALL_DIR=${PPAPI_FLASH_INSTALL_DIR:-/usr/lib/adobe-flashplugin}
+PPAPI_FLASH_INSTALL_DIR=${PPAPI_FLASH_INSTALL_DIR:-/usr/lib/pepperflashplugin-nonfree}
 
 # Set temp dir
 TMP=${TMP:-/tmp}
