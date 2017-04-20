@@ -10,7 +10,7 @@
   "scripts": {
     "build": "electron-packager ./app/ deezer-desktop-linux --platform=linux --arch=x64 --overwrite",
     "dist": "build",
-    "pepper": "rm -rf ./app/plugins && mkdir ./app/plugins && ./extract-linux-pepperflash.sh && mv /usr/lib/adobe-flashplugin/libpepflashplayer.so ./app/plugins/ && mv /usr/lib/adobe-flashplugin/manifest.json ./app/plugins/",
+    "pepper": "./install-flash.sh",
     "start": "electron app/main.js",
     "deb64": "electron-installer-debian --src dist/linux-unpacked/ --dest dist/installers/ --arch amd64"
   },
