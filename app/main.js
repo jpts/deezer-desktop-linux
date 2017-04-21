@@ -44,5 +44,6 @@ function create() {
 
     mainWindow.on('closed', function() {
         mainWindow = null;
+        app.quit();
     });
 };
