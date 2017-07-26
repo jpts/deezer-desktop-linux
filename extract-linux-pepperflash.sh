@@ -32,7 +32,7 @@ case $(uname -m) in
 esac
 
 # Work out the VERSION
-VERSION=$($SILENT_DL http://www.adobe.com/software/flash/about/ | grep -FA1 'Chromium-based browsers - PPAPI' | grep -Eo '([0-9]+\.){3}[0-9]+' | tail -n1)
+VERSION=$($SILENT_DL http://www.adobe.com/software/flash/about/ | grep -FA2 'Chromium-based browsers - PPAPI' | grep -Eo '([0-9]+\.){3}[0-9]+' | tail -n1)
 
 # Error out if $VERISON is unset, e.g. because previous command failed
 if [ -z "$VERSION" ]; then
