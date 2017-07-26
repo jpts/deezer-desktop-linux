@@ -75,8 +75,8 @@ elif [ -r /etc/os-release ] && grep -qx 'ID=\(ubuntu\|linuxmint\)' /etc/os-relea
   echo "Calling sudo ... (if prompted, please enter your password, so Flash can be copied into place)"
   tar --owner=0 --group=0 -cf- ".$PPAPI_FLASH_INSTALL_DIR" | sudo tar -xf- -C /
 else
-  echo "Please enter your root password so Pepper Flash can be copied into place"
-  su -c "sh -c \"tar --owner=0 --group=0 -cf- .$PPAPI_FLASH_INSTALL_DIR | tar -xf- -C /\""
+  echo "Calling sudo, please enter your password so Pepper Flash can be copied into place"
+  sudo su -c "sh -c \"tar --owner=0 --group=0 -cf- .$PPAPI_FLASH_INSTALL_DIR | tar -xf- -C /\""
 fi
 
 # Tell the user we are done
