@@ -15,7 +15,7 @@ const Player = function(mainWindow, configPath) {
     };
 	player = mpris({
         name: 'deezerdesktopforlinux',
-        identity: 'Deezer desktop for Linux',
+        identity: 'Deezer Desktop for Linux',
         supportedInterfaces: ['player'],
         rate: 1,
 		minimumRate: 1,
@@ -97,39 +97,25 @@ const Player = function(mainWindow, configPath) {
                     let artists = [];
 
                     if (value.ART_NAME !== undefined) {
-                        artists[artists.length] = value.ART_NAME;
+                        artists.push(value.ART_NAME);
                     } else if (value.ARTISTS !== undefined) {
                         for (var i = 0; i < value.ARTISTS.length; i++) {
-                            artists[artists.length] = value.ARTISTS[i].ART_NAME;
+                            artists.push(value.ARTISTS[i].ART_NAME);
                         }
                     }
 
-		    let coverPath = config.path + "/" + value.ALB_PICTURE + '.jpg';
-		    let url = 'http://cdn-images.deezer.com/images/cover/' + value.ALB_PICTURE + '/125x125.jpg';
-
-                    /*try {
-                        fs.statSync(coverPath);
-                    } catch (error) {
-			request.head(url, function(err,response,body){
-                            if (response.statusCode == 200) {
-                                request(url).pipe(fs.createWriteStream(tempPath)).on('close',update);
-				});
-                            } else {
-			        throw err;
-			    }
-                        });
-                    }*/
+		    let url = 'https://e-cdns-images.dzcdn.net/images/cover/' + value.ALB_PICTURE + '/125x125.jpg';
 
                     player.metadata = {
                         'mpris:trackid': value.SNG_ID,
-			//'mpris:artUrl': 'file://'+coverPath,
                         'mpris:artUrl': url,
                         'mpris:length': value.DURATION * 1000000, // In microseconds 
+                        'xesam:artist': artists,
                         'xesam:album': value.ALB_TITLE,
-                        'xesam:albumArtist': value.ART_NAME,
-                        'xesam:artist': artists.join(", "),
+                        'xesam:albumArtist': artists[0],
                         'xesam:title': value.SNG_TITLE
                     };
+			console.log(player.metadata);
                 }
             } else if (prop == "isShuffle") {
                 if (context.shuffle === undefined || context.shuffle !== value) {
