@@ -3,6 +3,10 @@
 * pepperflashplugin-nonfree
   * [Debian](https://wiki.debian.org/PepperFlashPlayer/Installing)
   * [Ubuntu](http://packages.ubuntu.com/fr/yakkety/pepperflashplugin-nonfree)
+  * Other - Use install script
+
+* Dependencies
+  * Fedora: nodejs dbus-glib-devel gcc-c++
 
 # Setup
 
