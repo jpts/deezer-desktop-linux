@@ -1,0 +1,5 @@
+{
+  "icon": "app/resources/dz-client-linux.svg",
+  "bin" : "deezer-desktop-linux",
+  "requires" : ["dbus-devel","glib2-devel"]
+}

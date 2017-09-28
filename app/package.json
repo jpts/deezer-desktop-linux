@@ -1,24 +1,21 @@
 {
-  "name": "deezer-desktop-for-linux",
-  "description": "A minimal Deezer integration for Linux",
+  "name": "deezer-desktop-linux",
+  "description": "Deezer App for Linux",
   "version": "0.0.1",
-  "author": {
-    "name": "Baptiste Donaux",
-    "email": "baptiste.donaux@gmail.com"
-  },
   "license": "MIT",
   "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/baptistedonaux/deezer-desktop-linux.git"
+    "url": "git+https://github.com/jpts/deezer-desktop-linux.git"
   },
-  "keywords": [
-    "deezer"
-  ],
   "bugs": {
-    "url": "https://github.com/baptistedonaux/deezer-desktop-linux/issues"
+    "url": "https://github.com/jpts/deezer-desktop-linux/issues"
   },
   "dependencies": {
+    "electron": "1.6.11",
     "mpris-service": "^1.1.1"
   }
 }

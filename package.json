@@ -1,18 +1,24 @@
 {
+  "description":"Desktop App for Deezer",
+  "name":"deezer-desktop-linux",
+  "url":"https://github.com/jpts/deezer-desktop-linux",
+  "license":"MIT",
   "devDependencies": {
-    "dbus": "^1.0.0",
-    "electron": "^1.6.5",
-    "electron-builder": "^13.9.0",
+    "electron-installer-redhat": "*",
     "electron-installer-debian": "^0.4.0",
-    "electron-packager": "^8.5.1",
-    "mpris-service": "^1.1.1"
+    "electron-packager": "*",
+    "electron-rebuild": "*"
   },
   "scripts": {
-    "build": "electron-packager ./app/ deezer-desktop-linux --platform=linux --arch=x64 --overwrite",
+    "start": "app/node_modules/.bin/electron app/main.js",
     "dist": "build",
+    "build": "electron-packager ./app/ deezer-desktop-linux --platform=linux --arch=x64 --overwrite --out=dist",
     "pepper": "./install-flash.sh",
-    "start": "electron app/main.js",
-    "deb64": "electron-installer-debian --src dist/linux-unpacked/ --dest dist/installers/ --arch amd64"
+    "deb64": "electron-installer-debian --src dist/deezer-desktop-linux-linux-x64/ --dest dist/installers/ --arch x86_64",
+    "rpm64": "electron-installer-redhat --src dist/deezer-desktop-linux-linux-x64/ --dest dist/installers/ --arch x86_64 --config dist/redhat.json",
+    "rpm-install": "dnf install -y dist/installers/deezer-desktop-linux-0.0.1.x86_64.rpm",
+    "rebuild": "electron-rebuild -f -e app/node_modules/electron -m app/",
+    "postinstall":"npm run rebuild"
   },
   "build": {
     "app-bundle-id": "1",
