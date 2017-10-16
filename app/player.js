@@ -22,29 +22,28 @@ const Player = function(mainWindow, configPath) {
     var update = this.update.bind(player, mainWindow);
 
     // Events
-    player.on('play', function () {
+    player.on('play', function() {
         mainWindow.webContents.executeJavaScript('dzPlayer.control.play();');
         update();
     });
 
-    player.on('pause', function () {
+    player.on('pause', function() {
         mainWindow.webContents.executeJavaScript('dzPlayer.control.pause();');
         update();
     });
 
-    player.on('playpause', function () {
+    player.on('playpause', function() {
         mainWindow.webContents.executeJavaScript('dzPlayer.control.togglePause();');
         update();
 	console.log('\'playpause pressed\'');
     });
 
-    player.on('previous', function () {
-	    console.log('prev');
+    player.on('previous', function() {
         mainWindow.webContents.executeJavaScript('dzPlayer.playTrackAtIndex(dzPlayer.getIndexSong() - 1);');
         update();
     });
 
-    player.on('next', function () {
+    player.on('next', function() {
         mainWindow.webContents.executeJavaScript('dzPlayer.playTrackAtIndex(dzPlayer.getIndexSong() + 1);');
         update();
     });
@@ -72,11 +71,11 @@ const Player = function(mainWindow, configPath) {
         //var p = (value/200).toFixed(2);
         //console.log(p);
         //mainWindow.webContents.executeJavaScript('dzPlayer.control.seek('+p+');');
-        update();
+        //update();
     });
 
     player.on('shuffle', function(value) {
-	console.log('\'shuffle pressed\'');
+	console.log('shuffle pressed');
 	mainWindow.webContents.executeJavaScript('dzPlayer.control.setShuffle('+value+');');
 	update();
     });
@@ -103,7 +102,7 @@ const Player = function(mainWindow, configPath) {
         update();
     });
 
-    ipcMain.on('context', function (event, values) {
+    ipcMain.on('context', function(event, values) {
         for (let prop in values) {
             let value = values[prop];
 
