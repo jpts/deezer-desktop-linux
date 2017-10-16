@@ -17,11 +17,6 @@ const Player = function(mainWindow, configPath) {
         name: 'deezerdesktopforlinux',
         identity: 'Deezer Desktop for Linux',
         supportedInterfaces: ['player'],
-        rate: 1,
-		minimumRate: 1,
-		maximumRate: 1,
-		canSeek: false,
-		canControl: false,
     });
 
     var update = this.update.bind(player, mainWindow);
@@ -43,6 +38,7 @@ const Player = function(mainWindow, configPath) {
     });
 
     player.on('previous', function () {
+	    console.log('prev');
         mainWindow.webContents.executeJavaScript('dzPlayer.playTrackAtIndex(dzPlayer.getIndexSong() - 1);');
         update();
     });
@@ -52,31 +48,33 @@ const Player = function(mainWindow, configPath) {
         update();
     });
 
-    // player.on('seek', function (event, value) {
-    //   // missing coef
-    //   console.log(value);
+    player.on('seek', function (event, value) {
+      // missing coef
+      console.log(value);
     //   mainWindow.webContents.executeJavaScript('dzPlayer.control.seek(0..1);');
     //   update();
-    // });
+    });
 
-    // player.on('position', function (event, value) {
-    //   // missing coef
-    //   console.log(value);
-    //   mainWindow.webContents.executeJavaScript('dzPlayer.position;');
-    //   update();
-    // });
+    player.on('position', function (event, value) {
+        var p = (value/200).toFixed(2);
+        console.log(p);
+        mainWindow.webContents.executeJavaScript('dzPlayer.control.seek('+p+');');
+        update();
+    });
 
-    // player.on('shuffle', function () {
+    player.on('shuffle', function (event,value) {
 	   //  // missing value
+	   console.log(value);
 	   //  mainWindow.webContents.executeJavaScript('dzPlayer.control.shuffle(true|false);');
 	   //  update();
-    // });
+    });
 
-    // player.on('volume', function () {
+    player.on('volume', function (event,value) {
     //     // missing value
+	   console.log(value);
     //     mainWindow.webContents.executeJavaScript('dzPlayer.control.setVolume(0..1);');
     //     update();
-    // });
+    });
 
     ipcMain.on('context', function (event, values) {
         for (let prop in values) {
@@ -115,7 +113,7 @@ const Player = function(mainWindow, configPath) {
                         'xesam:albumArtist': artists[0],
                         'xesam:title': value.SNG_TITLE
                     };
-			console.log(player.metadata);
+			//console.log(player.metadata);
                 }
             } else if (prop == "isShuffle") {
                 if (context.shuffle === undefined || context.shuffle !== value) {
