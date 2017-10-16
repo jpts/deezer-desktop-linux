@@ -5,6 +5,7 @@
   "license":"MIT",
   "devDependencies": {
     "electron-installer-redhat": "*",
+    "electron-installer-flatpak": "*",
     "electron-installer-debian": "^0.4.0",
     "electron-packager": "*",
     "electron-rebuild": "*"
@@ -16,7 +17,7 @@
     "pepper": "./install-flash.sh",
     "deb64": "electron-installer-debian --src dist/deezer-desktop-linux-linux-x64/ --dest dist/installers/ --arch x86_64",
     "rpm64": "electron-installer-redhat --src dist/deezer-desktop-linux-linux-x64/ --dest dist/installers/ --arch x86_64 --config dist/redhat.json",
-    "rpm-install": "dnf install -y dist/installers/deezer-desktop-linux-0.0.1.x86_64.rpm",
+    "pak64": "electron-installer-flatpak --src dist/deezer-desktop-linux-linux-x64/ --dest dist/installers/ --arch x86_64",
     "rebuild": "electron-rebuild -f -e app/node_modules/electron -m app/",
     "postinstall":"npm run rebuild"
   },
